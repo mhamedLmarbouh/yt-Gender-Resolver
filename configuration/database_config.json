@@ -1,0 +1,5 @@
+{
+    "hostname": "localhost",
+    "port": 27017,
+    "bdname": "youtube_comments"
+}
