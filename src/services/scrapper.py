@@ -29,11 +29,11 @@ sess.set_attribute('accelerated_compositing_enabled', True)
 sess.set_attribute('site_specific_quirks_enabled', False)
 
 # youtube channels links
-ytqueue = Queue
+ytqueue: Queue
 # google plus id
-gpidqueue = Queue
+gpidqueue: Queue
 # google plus data
-gpdata = Queue
+gpdata: Queue
 
 num_threads = 8
 
@@ -43,11 +43,27 @@ with open('./configuration/api_config.json', 'r') as conf:
 baseurl = 'https://www.googleapis.com/plus/v1/people/'
 
 
+def get_googleplus_data(youtubelinks):
+    global ytqueue, gpidqueue, gpdata
+    ytqueue = Queue
+    gpdata = Queue
+    gpidqueue = Queue
+    _get_gpid(youtubelinks)
+    _get_usersData()
+
+
 def _get_gpid(youtubelinks):
     global ytqueue
     _ytlinks_toqueue(youtubelinks)
     _run_gpidworkers()
     ytqueue.join()
+    return list(gpdata.queue)
+
+
+def _get_usersData():
+    global gpidqueue
+    _run_gpdataworkers()
+    gpidqueue.join()
 
 
 def _ytlinks_toqueue(youtubelinks):
@@ -79,12 +95,6 @@ def _scrap_gpid():
         ytqueue.task_done()
 
 
-def _get_usersData():
-    global gpidqueue
-    _run_gpdataworkers()
-    gpidqueue.join()
-
-
 def _run_gpdataworkers():
     global num_threads
     for i in range(num_threads):
@@ -97,10 +107,11 @@ def _fetch_gpdata():
     global gpidqueue, api_config, gpdata
     while True:
         gpid = gpidqueue.get()
-        res = requests.get(baseurl + gpid, params=api_config)
-        data = _prepare_data(res)
-        gpdata.put(data)
-        ytqueue.task_done()
+        jsonres = requests.get(baseurl + gpid, params=api_config).json()
+        data = _prepare_data(jsonres)
+        if data:
+            gpdata.put(data)
+        gpidqueue.task_done()
 
 
 def _prepare_data(data):
