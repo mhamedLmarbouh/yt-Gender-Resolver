@@ -27,3 +27,30 @@ class DatabaseService:
             res = []
 
         return res
+
+    def load_data(self, data, collection="") -> bool:
+        """
+        load a data to database, raise exception
+        :param data:
+        """
+        try:
+            if collection:
+                self.verify_collection_existence(collection)
+                self._database.insert(collection, data)
+            else:
+                self.verify_collection_existence()
+                self._database.insert(self._collection_name, data)
+            return True
+
+        except Exception as e:
+            # Error occurred while inserting comments
+            return False
+
+    def verify_collection_existence(self, collection="") -> None:
+        try:
+            if collection:
+                self._database.create_store(collection)
+            else:
+                self._database.create_store(self._collection_name)
+        except Exception as e:
+            pass

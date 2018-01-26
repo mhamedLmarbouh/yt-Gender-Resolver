@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/dry.iml" filepath="$PROJECT_DIR$/.idea/dry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../youtube_gender/.idea/youtube_gender.iml" filepath="$PROJECT_DIR$/../youtube_gender/.idea/youtube_gender.iml" />
     </modules>
   </component>
 </project>
