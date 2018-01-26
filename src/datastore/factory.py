@@ -9,7 +9,7 @@ class DatabaseFactory:
 
     def build(self):
         try:
-            with open('./configuration/database_config.json', 'r') as config:
+            with open('../configuration/database_config.json', 'r') as config:
                 database_conf = json.load(config)
             self._database_connection = database.Database(database_conf)
             return self
