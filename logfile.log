@@ -1,0 +1,13 @@
+[2018-01-26 09:41:00,677] {/home/mhamed/PycharmProjects/dry/src/main.py:15} INFO - missing videoId from request
+[2018-01-26 09:41:38,310] {/home/mhamed/PycharmProjects/dry/src/main.py:15} INFO - missing videoId from request
+[2018-01-26 09:42:36,555] {/home/mhamed/PycharmProjects/dry/src/main.py:15} INFO - missing videoId from request
+[2018-01-26 09:42:59,256] {/home/mhamed/PycharmProjects/dry/src/main.py:15} INFO - missing videoId from request
+[2018-01-26 09:45:04,566] {/home/mhamed/PycharmProjects/dry/src/main.py:18} INFO - start job
+[2018-01-26 09:47:47,753] {/home/mhamed/PycharmProjects/dry/src/main.py:20} INFO - start getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 09:54:53,312] {/home/mhamed/PycharmProjects/dry/src/main.py:19} INFO - start getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 09:58:54,492] {/home/mhamed/PycharmProjects/dry/src/main.py:19} INFO - start getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 09:59:02,525] {/home/mhamed/PycharmProjects/dry/src/services/genderstats_service.py:15} INFO - finished getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 11:13:43,527] {/home/mhamed/PycharmProjects/dry/src/main.py:19} INFO - start getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 11:13:55,994] {/home/mhamed/PycharmProjects/dry/src/services/genderstats_service.py:16} INFO - finished getting gender data for video -UAvLhaF-Eg
+[2018-01-26 11:17:26,706] {/home/mhamed/PycharmProjects/dry/src/main.py:19} INFO - start getting gender data fro video -UAvLhaF-Eg
+[2018-01-26 11:17:35,272] {/home/mhamed/PycharmProjects/dry/src/services/genderstats_service.py:17} INFO - finished getting gender data for video -UAvLhaF-Eg
