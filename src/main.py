@@ -29,7 +29,7 @@ if __name__ == '__main__':
     service.database_service = database_service
     formatter = logging.Formatter(
         "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-    handler = RotatingFileHandler('logfile.log', maxBytes=10000000, backupCount=5)
+    handler = RotatingFileHandler('../logfile.log', maxBytes=10000000, backupCount=5)
     handler.setLevel(logging.INFO)
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
