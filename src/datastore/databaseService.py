@@ -6,10 +6,9 @@ class DatabaseService:
         self._database = database_connection
         self._collection_name = collection_name
 
-    def find_by_videoId(self, videoId, cash=True, projection={}) -> tuple:
+    def find_by_videoId(self, videoId, cash=True, projection={}) -> list:
         '''
         :param videoId:
-        :param sort:
         :param cash:
         :param
         :return resultlist,count:
@@ -30,7 +29,7 @@ class DatabaseService:
 
     def load_data(self, data, collection="") -> bool:
         """
-        load a data to database, raise exception
+        load data to database, raise exception
         :param data:
         """
         try:

@@ -3,7 +3,7 @@ import json
 import requests
 from googleapiclient.discovery import build
 
-with open('../configuration/api_config.json', 'r') as conf:
+with open('./configuration/api_config.json', 'r') as conf:
     api = json.load(conf)
 
 service = build(api["youtube"]["name"], api["youtube"]["version"], developerKey=api["youtube"]["key"],

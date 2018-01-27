@@ -78,8 +78,9 @@ def _get_usersData():
 
 
 def _run_gpidworkers():
+    print('running scrapping jobs')
     global num_threads
-    for i in range(num_threads * 6):
+    for i in range(num_threads * 3):
         worker = Thread(target=_scrap_gpid)
         worker.setDaemon(True)
         worker.start()

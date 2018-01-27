@@ -9,11 +9,12 @@ class DatabaseFactory:
 
     def build(self):
         try:
-            with open('../configuration/database_config.json', 'r') as config:
+            with open('./configuration/database_config.json', 'r') as config:
                 database_conf = json.load(config)
             self._database_connection = database.Database(database_conf)
             return self
         except Exception as e:
+            print('error while in DatabaseFactory().build()')
             return None
 
     def get_database_service(self, collection_name="comments"):
