@@ -7,6 +7,11 @@ from dryscrape import Session, start_xvfb
 
 from src.services.googlerequest import gp_personnaldata
 
+
+
+num_threads_crawler = 8
+num_threads_googleplus=4
+
 if 'linux' in sys.platform:
     # start xvfb in case no X is running. Make sure xvfb
     # is installed, otherwise this won't work!
@@ -32,8 +37,6 @@ def _create_sess() -> Session:
     return sess
 
 
-num_threads = 2
-
 sessqueue: Queue
 # youtube channels links
 ytqueue: Queue
@@ -58,13 +61,6 @@ def _get_gpid(youtubeids):
     ytqueue.join()
 
 
-# def _has_googleplus(youtubeids):
-#     havegp = []
-#     for idschunk in _chunk(youtubeids):
-#         havegp.extend(channels_withgp(idschunk))
-#     return havegp
-
-
 def _ytlinks_toqueue(youtubeids):
     global ytqueue
     for id in youtubeids:
@@ -78,9 +74,9 @@ def _get_usersData():
 
 
 def _run_gpidworkers():
-    print('running scrapping jobs')
+    print('running scrapping find_by_videoIdjobs')
     global num_threads
-    for i in range(num_threads * 3):
+    for i in range(num_threads_crawler):
         worker = Thread(target=_scrap_gpid)
         worker.setDaemon(True)
         worker.start()
@@ -115,7 +111,7 @@ def _scrap_gpid():
 
 def _run_gpdataworkers():
     global num_threads
-    for i in range(num_threads):
+    for i in range(num_threads_googleplus):
         worker = Thread(target=_fetch_gpdata)
         worker.setDaemon(True)
         worker.start()
