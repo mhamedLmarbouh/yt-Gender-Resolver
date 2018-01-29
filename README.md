@@ -45,7 +45,3 @@ python main.py
 * **LMARBOUH Mhamed** 
 
 
-## Acknowledgments
-
-* Greate thanks to the Dash Framework Community for the greate support.
-
