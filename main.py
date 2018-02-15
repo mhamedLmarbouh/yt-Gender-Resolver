@@ -12,13 +12,10 @@ app = Flask(__name__)
 
 @app.route('/api/v1/genderstats', methods=['POST'])
 def gender_count():
-    print('got post request')
-    print(request.get_json())
     if request is None or not request.json or not 'videoId' in request.json:
         app.logger.info('missing VideoId from request')
         return 'missing data', 400
     else:
-        print('starting work thread')
         videoId = request.json['videoId']
         app.logger.info('start getting gender data fro video ' + videoId)
         job = Thread(target=service.detect_gender, args=(videoId, app.logger))

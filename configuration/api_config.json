@@ -1,10 +1,5 @@
 {
-  "people": {
-    "key": "AIzaSyBMrNA6dW6j5Rx-gqqQtKD8iYpK4nmPUpY"
-  },
-  "youtube": {
     "key": "AIzaSyDiGZgQK0PqU7RzjS3wuStcj1xnRc9-SGo",
     "name": "youtube",
     "version": "v3"
-  }
 }

@@ -47,6 +47,8 @@ gpdata: Queue
 
 
 def get_googleplus_data(youtubeids):
+    """this function will call the crawler to get the google plus ids
+    and then launch the api calls to get the gender data"""
     global gpdata
     _init_queues()
     _get_gpid(youtubeids)
@@ -55,6 +57,7 @@ def get_googleplus_data(youtubeids):
 
 
 def _get_gpid(youtubeids):
+    """this function will prepare the youtube pages urls and call the crawlers manager """
     global ytqueue, gpidqueue
     _ytlinks_toqueue(youtubeids)
     _run_gpidworkers()
@@ -68,13 +71,14 @@ def _ytlinks_toqueue(youtubeids):
 
 
 def _get_usersData():
+    """this function will call the api manager """
     global gpidqueue, gpdata
     _run_gpdataworkers()
     gpidqueue.join()
 
 
 def _run_gpidworkers():
-    print('running scrapping find_by_videoIdjobs')
+    """this function is a crawlers manager that will run the threads of crawler"""
     global num_threads
     for i in range(num_threads_crawler):
         worker = Thread(target=_scrap_gpid)
@@ -83,6 +87,8 @@ def _run_gpidworkers():
 
 
 def _scrap_gpid():
+    """this function will try to visit a youtube channel and crawl it for the google plus id
+    if it exists it will add it to gpidquee"""
     global ytqueue, gpidqueue, sessqueue
     while True:
         # get the youtube channel url
@@ -110,6 +116,7 @@ def _scrap_gpid():
 
 
 def _run_gpdataworkers():
+    """this function is a api manager that will run the threads of api callers"""
     global num_threads
     for i in range(num_threads_googleplus):
         worker = Thread(target=_fetch_gpdata)
@@ -118,6 +125,7 @@ def _run_gpdataworkers():
 
 
 def _fetch_gpdata():
+    """this function will get a googleplus id from gpidquee and get the personal data of it's owner"""
     global gpidqueue, gpdata
     while True:
         gpid = gpidqueue.get()
@@ -135,15 +143,3 @@ def _init_queues():
     sessqueue = Queue()
     sessqueue.put(_create_sess())
 
-
-def _chunk(youtubeids, chunksize=50):
-    count = len(youtubeids)
-    start = 0
-    end = 0
-    while end != count:
-        if end + chunksize > count:
-            end = count
-        else:
-            end += chunksize
-        yield youtubeids[start:end]
-        start = end

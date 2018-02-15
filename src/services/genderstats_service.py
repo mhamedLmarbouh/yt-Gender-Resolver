@@ -7,12 +7,15 @@ database_service: DatabaseService
 
 
 def detect_gender(videoId: str,logger):
+    """this function will make the needed calls and save results in database and return response"""
+    # get the comments list
     res = database_service.find_by_videoId(videoId, projection={"_id": 0, "authorChannelId": 1})
-    print('getting google plus gender data')
+    # get gender data for the comments
     data = scrapper.get_googleplus_data(res)
+
     gendercount = dict(Counter(data))
     gendercount['videoId'] = videoId
-    print('load data')
+    # save to databse
     res=database_service.load_data(gendercount,collection='genderData')
     try:
         if res:
